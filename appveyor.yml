@@ -73,7 +73,9 @@ install:
   - "powershell .ci\\appveyor\\install.ps1"
   # - ps: (new-object net.webclient).DownloadFile('https://raw.github.com/pypa/pip/master/contrib/get-pip.py', 'C:/get-pip.py')
   - "%WITH_COMPILER% %PYTHON%/python.exe -m pip --version"
-  - "%WITH_COMPILER% %PYTHON%/python.exe -m pip install --upgrade --user setuptools pip"
+  # XXX temporary fix around setuptools
+  - "%WITH_COMPILER% %PYTHON%/python.exe -m pip install --user setuptools==59.6.0"
+  - "%WITH_COMPILER% %PYTHON%/python.exe -m pip install --upgrade --user pip"
   - "%WITH_COMPILER% %PYTHON%/python.exe scripts/internal/winmake.py setup-dev-env"
   - "%WITH_COMPILER% %PYTHON%/python.exe -m pip freeze"
   - "%WITH_COMPILER% %PYTHON%/python.exe scripts/internal/winmake.py install"
